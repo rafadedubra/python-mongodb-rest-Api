@@ -18,7 +18,7 @@ app.config['MONGO_URI'] = DBURL
 mongo = PyMongo(app)
 
 
-@app.route("/")
+@app.route("/index")
 def index():
     readme_file = open("README.md", "r")
     md_template_string= markdown.markdown(readme_file.read(), extensions = ["fenced_code"])
@@ -47,18 +47,18 @@ def get_users():
     return Response(response, mimetype="application/json")
 
 
-@app.route('/users/<id>', methods=['GET'])
-def get_user(id):
-    print(id)
-    user = mongo.db.users.find_one({'_id': ObjectId(id), })
+@app.route('/users/<_id>', methods=['GET'])
+def get_user(_id):
+    print(_id)
+    user = mongo.db.users.find_one({'_id': ObjectId(_id), })
     response = json_util.dumps(user)
     return Response(response, mimetype="application/json")
 
 
-@app.route('/users/<id>', methods=['DELETE'])
-def delete_user(id):
-    mongo.db.users.delete_one({'_id': ObjectId(id)})
-    response = jsonify({'message': 'User' + id + ' Deleted Successfully'})
+@app.route('/users/<_id>', methods=['DELETE'])
+def delete_user(_id):
+    mongo.db.users.delete_one({'_id': ObjectId(_id)})
+    response = jsonify({'message': 'User' + _id + ' Deleted Successfully'})
     response.status_code = 200
     return response
 
@@ -78,7 +78,6 @@ def update_user(_id):
     
 @app.route('/chat', methods=['POST'])
 def create_chat():
-    # Receiving Data
     user = request.json['user']
     chatname = request.json['chatname']
     message = request.json['message']
@@ -103,22 +102,22 @@ def get_chats():
     response = json_util.dumps(chat)
     return Response(response, mimetype="application/json")
 
-@app.route('/chat/<id>', methods=['GET'])
-def get_chat(id):
-    print(id)
-    user = mongo.db.chat.find_one({'_id': ObjectId(id), })
+@app.route('/chat/<_id>', methods=['GET'])
+def get_chat(_id):
+    print(_id)
+    user = mongo.db.chat.find_one({'_id': ObjectId(_id), })
     response = json_util.dumps(user)
     return Response(response, mimetype="application/json")
 
 
-@app.route('/chat/<id>', methods=['DELETE'])
-def delete_chat(id):
-    mongo.db.chat.delete_one({'_id': ObjectId(id)})
-    response = jsonify({'message': 'User' + id + ' Deleted Successfully'})
+@app.route('/chat/<_id>', methods=['DELETE'])
+def delete_chat(_id):
+    mongo.db.chat.delete_one({'_id': ObjectId(_id)})
+    response = jsonify({'message': 'User' + _id + ' Deleted Successfully'})
     response.status_code = 200
     return response
 
-@app.route('/uschaters/<_id>', methods=['PUT'])
+@app.route('/chat/<_id>', methods=['PUT'])
 def update_chat(_id):
     user = request.json['user']
     chatname = request.json['chatname']
