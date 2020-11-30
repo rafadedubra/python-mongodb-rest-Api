@@ -3,7 +3,7 @@
 </p>
 
 # API de Naruto
-En esto proyecto creo una API de Naruto que permite obtener información de una base de datos que contiene frases que han dicho los personajes ordenadas por grupos como si fuera una conversación.<br>
+En este proyecto creo una API de Naruto que permite obtener información de una base de datos que contiene frases que han dicho los personajes ordenadas por grupos como si fuera una conversación.<br>
 También analizo los sentimientos de los personajes mediante el procesamiento del lenguaje natural (NLTK) <br>
 
 # Endpoints
